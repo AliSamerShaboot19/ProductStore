@@ -2,7 +2,9 @@ import express from 'express'
 import { PORT, CLIENT_URL } from './config/env'
 import { clerkMiddleware } from '@clerk/express'
 import cors from 'cors'
-import { User } from './db/Schema'
+import userRoutes from './routes/userRoutes'
+import productRoutes from './routes/productRoutes'
+import commentRoutes from './routes/userRoutes'
 
 const app = express()
 
@@ -18,6 +20,10 @@ app.get('/', (req, res) => {
     endpoints: 'api/products, api/comments, api/users'
   })
 })
+
+app.use('api/users',userRoutes)
+app.use('api/products',productRoutes)
+app.use('api/comments',commentRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
