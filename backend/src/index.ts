@@ -2,6 +2,7 @@ import express from 'express'
 import { PORT, CLIENT_URL } from './config/env'
 import { clerkMiddleware } from '@clerk/express'
 import cors from 'cors'
+import { User } from './db/Schema'
 
 const app = express()
 
