@@ -9,18 +9,28 @@ import {
   type NewProduct
 } from './Schema'
 
-// uesrs queries
-
 export const createUser = async (data: NewUser) => {
+  if (!data.id) {
+    throw new Error('User ID is required')
+  }
+
   const [user] = await db.insert(users).values(data).returning()
   return user
 }
 
 export const getUserById = async (id: string) => {
+  if (!id) {
+    throw new Error('User ID is required')
+  }
   return db.query.users.findFirst({ where: eq(users.id, id) })
 }
 
 export const updateUser = async (id: string, data: Partial<NewUser>) => {
+  const existingUser = await getUserById(id)
+  if (!existingUser) {
+    throw new Error(`User with ID ${id} not found`)
+  }
+
   const [user] = await db
     .update(users)
     .set(data)
@@ -29,18 +39,31 @@ export const updateUser = async (id: string, data: Partial<NewUser>) => {
   return user
 }
 
-// create or update
+export const upsertUser = async (data: NewUser) => {
+  if (!data.id) {
+    throw new Error('User ID is required for upsert operation')
+  }
 
-export const upserUser = async (data: NewUser) => {
-  const exitingUser = await getUserById(data.id)
-  if (exitingUser) return updateUser(data.id, data)
-
-  return createUser(data)
+  const existingUser = await getUserById(data.id)
+  
+  if (existingUser) {
+    const { id, ...updateData } = data
+    return updateUser(id, updateData)
+  } else {
+    return createUser(data)
+  }
 }
 
-// product queries
-
 export const createProduct = async (data: NewProduct) => {
+  if (!data.userId) {
+    throw new Error('User ID is required to create a product')
+  }
+  
+  const userExists = await getUserById(data.userId)
+  if (!userExists) {
+    throw new Error(`Cannot create product because user with ID ${data.userId} does not exist`)
+  }
+
   const [product] = await db.insert(products).values(data).returning()
   return product
 }
@@ -53,6 +76,9 @@ export const getAllProducts = async () => {
 }
 
 export const getProductById = async (id: string) => {
+  if (!id) {
+    throw new Error('Product ID is required')
+  }
   return db.query.products.findFirst({
     where: eq(products.id, id),
     with: {
@@ -66,16 +92,29 @@ export const getProductById = async (id: string) => {
 }
 
 export const getProductByUserId = async (userId: string) => {
+  if (!userId) {
+    throw new Error('User ID is required')
+  }
   return db.query.products.findMany({
     where: eq(products.userId, userId),
-    with: {
-      user: true
-    },
+    with: { user: true },
     orderBy: (products, { desc }) => [desc(products.createdAt)]
   })
 }
 
 export const updateProduct = async (id: string, data: Partial<NewProduct>) => {
+  const existingProduct = await getProductById(id)
+  if (!existingProduct) {
+    throw new Error(`Product with ID ${id} not found`)
+  }
+
+  if (data.userId) {
+    const userExists = await getUserById(data.userId)
+    if (!userExists) {
+      throw new Error(`Cannot assign user because user with ID ${data.userId} does not exist`)
+    }
+  }
+
   const [product] = await db
     .update(products)
     .set(data)
@@ -85,6 +124,11 @@ export const updateProduct = async (id: string, data: Partial<NewProduct>) => {
 }
 
 export const deleteProduct = async (id: string) => {
+  const existingProduct = await getProductById(id)
+  if (!existingProduct) {
+    throw new Error(`Product with ID ${id} not found`)
+  }
+
   const [product] = await db
     .delete(products)
     .where(eq(products.id, id))
@@ -92,14 +136,33 @@ export const deleteProduct = async (id: string) => {
   return product
 }
 
-// comment queries
-
 export const createComment = async (data: NewComment) => {
+  if (!data.productId) {
+    throw new Error('Product ID is required')
+  }
+  const productExists = await getProductById(data.productId)
+  if (!productExists) {
+    throw new Error(`Cannot add comment because product with ID ${data.productId} does not exist`)
+  }
+
+  if (!data.userId) {
+    throw new Error('User ID is required')
+  }
+  const userExists = await getUserById(data.userId)
+  if (!userExists) {
+    throw new Error(`Cannot add comment because user with ID ${data.userId} does not exist`)
+  }
+
   const [comment] = await db.insert(comments).values(data).returning()
   return comment
 }
 
 export const deleteComment = async (id: string) => {
+  const existingComment = await getCommentById(id)
+  if (!existingComment) {
+    throw new Error(`Comment with ID ${id} not found`)
+  }
+
   const [comment] = await db
     .delete(comments)
     .where(eq(comments.id, id))
@@ -108,9 +171,11 @@ export const deleteComment = async (id: string) => {
 }
 
 export const getCommentById = async (id: string) => {
+  if (!id) {
+    throw new Error('Comment ID is required')
+  }
   return db.query.comments.findFirst({
     where: eq(comments.id, id),
     with: { user: true }
   })
 }
-
