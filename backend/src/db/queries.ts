@@ -13,7 +13,6 @@ export const createUser = async (data: NewUser) => {
   if (!data.id) {
     throw new Error('User ID is required')
   }
-
   const [user] = await db.insert(users).values(data).returning()
   return user
 }
