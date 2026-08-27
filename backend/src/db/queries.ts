@@ -44,7 +44,7 @@ export const upsertUser = async (data: NewUser) => {
   }
 
   const existingUser = await getUserById(data.id)
-  
+
   if (existingUser) {
     const { id, ...updateData } = data
     return updateUser(id, updateData)
@@ -57,10 +57,12 @@ export const createProduct = async (data: NewProduct) => {
   if (!data.userId) {
     throw new Error('User ID is required to create a product')
   }
-  
+
   const userExists = await getUserById(data.userId)
   if (!userExists) {
-    throw new Error(`Cannot create product because user with ID ${data.userId} does not exist`)
+    throw new Error(
+      `Cannot create product because user with ID ${data.userId} does not exist`
+    )
   }
 
   const [product] = await db.insert(products).values(data).returning()
@@ -110,7 +112,9 @@ export const updateProduct = async (id: string, data: Partial<NewProduct>) => {
   if (data.userId) {
     const userExists = await getUserById(data.userId)
     if (!userExists) {
-      throw new Error(`Cannot assign user because user with ID ${data.userId} does not exist`)
+      throw new Error(
+        `Cannot assign user because user with ID ${data.userId} does not exist`
+      )
     }
   }
 
@@ -141,15 +145,20 @@ export const createComment = async (data: NewComment) => {
   }
   const productExists = await getProductById(data.productId)
   if (!productExists) {
-    throw new Error(`Cannot add comment because product with ID ${data.productId} does not exist`)
+    throw new Error(
+      `Cannot add comment because product with ID ${data.productId} does not exist`
+    )
   }
 
   if (!data.userId) {
     throw new Error('User ID is required')
   }
+
   const userExists = await getUserById(data.userId)
   if (!userExists) {
-    throw new Error(`Cannot add comment because user with ID ${data.userId} does not exist`)
+    throw new Error(
+      `Cannot add comment because user with ID ${data.userId} does not exist`
+    )
   }
 
   const [comment] = await db.insert(comments).values(data).returning()
