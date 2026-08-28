@@ -7,3 +7,5 @@ cors
 code rabbit
 
 daisyUI
+
+axios

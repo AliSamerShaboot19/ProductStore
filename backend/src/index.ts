@@ -8,7 +8,7 @@ import commentRoutes from './routes/userRoutes'
 
 const app = express()
 
-app.use(cors({ origin: CLIENT_URL }))
+app.use(cors({ origin: CLIENT_URL, credentials: true }))
 app.use(clerkMiddleware())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -21,9 +21,9 @@ app.get('/', (req, res) => {
   })
 })
 
-app.use('api/users',userRoutes)
-app.use('api/products',productRoutes)
-app.use('api/comments',commentRoutes)
+app.use('api/users', userRoutes)
+app.use('api/products', productRoutes)
+app.use('api/comments', commentRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
