@@ -1,10 +1,3 @@
-import {
-  Show,
-  SignInButton,
-  SignOutButton,
-  SignUpButton,
-  UserButton
-} from '@clerk/react'
 import { Routes, Route } from 'react-router'
 import NavBar from './components/NavBar'
 import Home from './pages/Home'

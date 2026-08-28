@@ -47,6 +47,7 @@ const ThemeSelector = () => {
     document.documentElement.setAttribute('data-theme', theme)
     localStorage.setItem('theme', theme)
   }, [theme])
+  
   return (
     <div className='dropdown dropdown-end'>
       <div tabIndex={0} role='button' className='btn btn-ghost btn-sm gap-1'>
