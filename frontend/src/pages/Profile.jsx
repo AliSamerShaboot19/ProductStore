@@ -40,7 +40,7 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        \
+        
         {products?.length === 0 ? (
           <div className='card bg-base-300'>
             <div className='card-body items-center text-center py-16'>

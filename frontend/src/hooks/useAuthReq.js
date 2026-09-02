@@ -1,17 +1,17 @@
-import { SignIn, useAuth } from '@clerk/react'
+import { useAuth } from '@clerk/react'
 import { useEffect } from 'react'
 import api from '../lib/axios'
 
 let isInterceptorRegistered = false
 
-function useAutReq () {
+function useAuthReq () {
   const { isSignedIn, getToken, isLoaded } = useAuth()
 
   useEffect(() => {
     if (isInterceptorRegistered) return
     isInterceptorRegistered = true
     const interceptor = api.interceptors.request.use(async config => {
-      if (SignIn) {
+      if (isSignedIn) {
         const token = await getToken()
         if (token) {
           config.headers.Authorization = `Bearer ${token}`
@@ -29,4 +29,4 @@ function useAutReq () {
   return { isSignedIn, isClerkLoaded: isLoaded }
 }
 
-export default useAutReq
+export default useAuthReq

@@ -1,23 +1,26 @@
-import { Routes, Route, Navigate } from 'react-router'
-import NavBar from './components/NavBar'
+import Navbar from './components/Navbar'
+import { Navigate, Route, Routes } from 'react-router'
 import Home from './pages/Home'
 import Productpage from './pages/Productpage'
 import Profile from './pages/Profile'
 import CreatePage from './pages/CreatePage'
 import EditPage from './pages/EditPage'
-import { useAuth } from '@clerk/react'
-const App = () => {
-  const { isSignedIn } = useAuth()
-  return (
+import useAuthReq from './hooks/useAuthReq'
+import useUserSync from './hooks/useUserSync'
+
+function App () {
+  const { isClerkLoaded, isSignedIn } = useAuthReq()
+  useUserSync()
+
+  if (!isClerkLoaded) return null
+
+  return ( 
     <div className='min-h-screen bg-base-100'>
-      <NavBar />
+      <Navbar />
       <main className='max-w-5xl mx-auto px-4 py-8'>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route
-            path='/product/:id'
-            element={isSignedIn ? <Productpage /> : <Navigate to={'/'} />}
-          />
+          <Route path='/product/:id' element={<Productpage />} />
           <Route
             path='/profile'
             element={isSignedIn ? <Profile /> : <Navigate to={'/'} />}
@@ -35,4 +38,5 @@ const App = () => {
     </div>
   )
 }
+
 export default App
