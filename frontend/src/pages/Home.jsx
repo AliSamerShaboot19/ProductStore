@@ -3,10 +3,10 @@ import LoadingSpinner from '../components/LoadingSpinner'
 import { useProducts } from '../hooks/useProducts'
 import { Link } from 'react-router'
 import { SignInButton } from '@clerk/react'
+import ProductCard from '../components/ProductCard'
 
 const Home = () => {
-  /*
-  const { data: products} = useProducts()
+  const { data: products, isLoading, error } = useProducts()
   if (isLoading) return <LoadingSpinner />
   if (error) {
     return (
@@ -15,7 +15,6 @@ const Home = () => {
       </div>
     )
   }
-    */
 
   return (
     <div className='space-y-10'>
@@ -54,7 +53,7 @@ const Home = () => {
         </h2>
       </div>
 
-      {[].length === 0 ? (
+      {products?.length === 0 ? (
         <div className='crad bg-base-300'>
           <div className='card-body items-center text-center py-16'>
             <PackageIcon className='size-16 text-base-content/20' />
@@ -69,11 +68,9 @@ const Home = () => {
         </div>
       ) : (
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {/*
-          {[].map(pro => (
-            <ProductCard key={pro.id} products={pro} />
+          {products?.map(pro => (
+            <ProductCard key={pro.id} product={pro} />
           ))}
-            */}
         </div>
       )}
     </div>

@@ -14,6 +14,7 @@ const CommentSection = ({ productId, comments = [], currentUserId }) => {
 
   const createComment = useCreateComment()
   const deleteComment = useDeleteComment(productId)
+  console.log(productId)
 
   const handleSubmit = e => {
     e.preventDefault()

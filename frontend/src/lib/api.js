@@ -20,7 +20,7 @@ export const getMyProducts = async () => {
   return data
 }
 
-export const creaeProduct = async productData => {
+export const createProduct = async productData => {
   const { data } = await api.post('/products', productData)
   return data
 }
@@ -36,7 +36,7 @@ export const deleteProduct = async id => {
 }
 
 export const createComment = async ({ productId, content }) => {
-  const { data } = await api.post(`/comments/${productId}`, content)
+  const { data } = await api.post(`/comments/${productId}`, {content})
   return data
 }
 

@@ -1,16 +1,25 @@
-import { Router } from 'express'
-import * as productController from '../controllers/productController'
-import { requireAuth } from '@clerk/express'
+import { Router } from "express";
+import * as productController from "../controllers/productController";
+import { requireAuth } from "@clerk/express";
 
-const router = Router()
+const router = Router();
 
-router.get('/', productController.getAllProducts)
-router.get('/my', productController.getMyProducts)
-router.get('/:id', productController.getProductById)
+// GET /api/products => Get all products (public)
+router.get("/", productController.getAllProducts);
 
-router.post('/', requireAuth(), productController.createProduct)
+// GET /api/products/my - Get current user's products (protected)
+router.get("/my", requireAuth(), productController.getMyProducts);
 
-router.put('/:id', requireAuth(), productController.updateProduct)
+// GET /api/products/:id - Get single product by ID (public)
+router.get("/:id", productController.getProductById);
 
-router.delete("/:id",requireAuth(),productController.deleteProduct)
-export default router
+// POST /api/products - Create new product (protected)
+router.post("/", requireAuth(), productController.createProduct);
+
+// PUT /api/products/:id - Update product (protected - owner only)
+router.put("/:id", requireAuth(), productController.updateProduct);
+
+// DELETE /api/products/:id - Delete product (protected - owner only)
+router.delete("/:id", requireAuth(), productController.deleteProduct);
+
+export default router;
