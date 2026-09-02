@@ -1,18 +1,20 @@
 import { drizzle } from 'drizzle-orm/node-postgres'
 import { Pool } from 'pg'
 import * as schema from './Schema'
-import { DB_URL } from '../config/env'
+import { ENV } from '../config/env'
 
-if (!DB_URL) {
-  throw new Error('Database URL is not defined in the environment variables.')
+if (!ENV.DATABASE_URL) {
+  throw new Error('DATABASE_URL is not set in environment variables')
 }
 
-const pool = new Pool({
-  connectionString: DB_URL
-})
+const pool = new Pool({ connectionString: ENV.DATABASE_URL })
 
 pool.on('connect', () => {
-  console.log('Database connected successfully.💚')
+  console.log('Database connected successfully ✅')
 })
 
-export const db = drizzle(pool, { schema })
+pool.on('error', err => {
+  console.error('💥 Database connection error:', err)
+})
+
+export const db = drizzle({ client: pool, schema })
