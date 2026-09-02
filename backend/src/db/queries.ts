@@ -92,6 +92,7 @@ export const getProductById = async (id: string) => {
   })
 }
 
+
 export const getProductByUserId = async (userId: string) => {
   if (!userId) {
     throw new Error('User ID is required')
