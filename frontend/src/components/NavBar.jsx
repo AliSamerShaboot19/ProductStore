@@ -1,5 +1,11 @@
 import { Link } from 'react-router'
-import { SignInButton, SignOutButton, UserButton, useAuth } from '@clerk/react'
+import {
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  UserButton,
+  useAuth
+} from '@clerk/react'
 import { PlusIcon, ShoppingBagIcon, UserIcon } from 'lucide-react'
 
 import ThemeSelector from './ThemeSelector'
@@ -44,9 +50,9 @@ const NavBar = () => {
                 <button className='btn btn-ghost btn-sm'>Sign In</button>
               </SignInButton>
 
-              <SignOutButton mode='modal'>
+              <SignUpButton mode='modal'>
                 <button className='btn btn-primary btn-sm'>Get Started</button>
-              </SignOutButton>
+              </SignUpButton>
             </>
           )}
         </div>

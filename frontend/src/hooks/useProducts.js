@@ -19,7 +19,7 @@ export const useCreateProduct = () => {
 
 export const useProduct = id => {
   return useQuery({
-    queryKey: ['products', id],
+    queryKey: ['product', id],
     queryFn: () => getProductById(id),
     enabled: !!id
   })

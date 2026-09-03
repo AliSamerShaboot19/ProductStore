@@ -5,6 +5,8 @@ const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
 
 const ProductCard = ({ product }) => {
   const isNew = new Date(product.createdAt) > oneWeekAgo
+ 
+  
 
   return (
     <Link
