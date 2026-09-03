@@ -1,140 +1,156 @@
-📦 PRODUCTIFY – Product Sharing Platform
+# 📦 PRODUCTIFY – Product Sharing Platform
 
 ![Productify Screenshot](./frontend/public/forgit.jpg)
 
-🚀 Overview
+---
 
-PRODUCTIFY is a full‑stack application that allows users to:
-    Browse products posted by the community.
-    Add new products (after signing in).
-    Edit or delete their own products.
-    Comment on any product.
-    Automatically sync user data with the database via Clerk.
+## 🚀 Overview
 
-The frontend is built with React, the backend with Express + PostgreSQL, using Drizzle ORM for database access and Clerk for authentication.
+**PRODUCTIFY** is a full‑stack web application that enables users to:
 
-✨ Key Features
+- Browse products shared by the community.
+- Add new products after signing in.
+- Edit or delete their own products.
+- Comment on any product.
+- Automatically sync user data with the database via Clerk.
 
-Feature	Description
+The frontend is built with **React**, the backend with **Express + PostgreSQL**, using **Drizzle ORM** for database access and **Clerk** for authentication.
 
-🔐 Clerk Authentication	Secure sign‑in/sign‑out via email or social providers.  
-📦 Product Management	Create, view, edit, and delete products (products are tied to their owners).
-💬 Comment System	Add and delete comments on products (only the comment owner can delete).
-👤 User Profile	View all your products with edit/delete options.
-🎨 Multiple Themes	Choose from 30+ DaisyUI themes (preference saved locally).
-📱 Responsive Design	Smooth experience on all devices using Tailwind CSS.
-🔄 User Sync	User data is automatically synced from Clerk to the database upon login.
-⚡ State Management	Powered by TanStack Query for caching and instant updates.
+---
 
-🛠️ Tech Stack
+## ✨ Key Features
 
-Frontend
-React 19 + React Router v7
-Clerk React for authentication
-TanStack Query (React Query) for data state management
-Tailwind CSS + DaisyUI for styling and theming
-Lucide React for icons
+| Feature | Description |
+|---------|-------------|
+| 🔐 **Clerk Authentication** | Secure sign‑in/sign‑out via email or social providers. |
+| 📦 **Product Management** | Create, view, edit, and delete products (products are tied to their owners). |
+| 💬 **Comment System** | Add and delete comments on products (only the comment owner can delete). |
+| 👤 **User Profile** | View all your products with edit/delete options. |
+| 🎨 **Multiple Themes** | Choose from 30+ DaisyUI themes (preference saved locally). |
+| 📱 **Responsive Design** | Smooth experience on all devices using Tailwind CSS. |
+| 🔄 **User Sync** | User data is automatically synced from Clerk to the database upon login. |
+| ⚡ **State Management** | Powered by TanStack Query for caching and instant updates. |
 
-Backend
-Node.js + Express
-PostgreSQL relational database
-Drizzle ORM for database interaction
-Clerk Express for server‑side authentication
-Cors and dotenv for configuration
+---
 
-📁 Project Structure
+## 🛠️ Tech Stack
 
+### Frontend
+- **React 19** + React Router v7  
+- **Clerk React** for authentication  
+- **TanStack Query** (React Query) for state management  
+- **Tailwind CSS** + **DaisyUI** for styling and theming  
+- **Lucide React** for icons  
+
+### Backend
+- **Node.js** + **Express**  
+- **PostgreSQL** relational database  
+- **Drizzle ORM** for database interaction  
+- **Clerk Express** for server‑side authentication  
+- **Cors** & **dotenv** for configuration  
+
+---
+
+## 📁 Project Structure
 PRODUCTIFY/
-├── frontend/                 # React source files
-│   ├── src/
-│   │   ├── components/       # Reusable UI components (Navbar, ProductCard, CommentsSection…)
-│   │   ├── pages/            # Main pages (Home, Profile, CreatePage, EditPage, ProductPage)
-│   │   ├── hooks/            # Custom hooks (useAuthReq, useUserSync, useProducts, useComments)
-│   │   ├── lib/              # API setup (axios, api.js)
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css         # Tailwind + DaisyUI integration
-│   └── ...
-├── backend/                  # Express source files
-│   ├── src/
-│   │   ├── config/           # Environment configuration (env.ts)
-│   │   ├── controllers/      # Request handlers (userController, productController, commentController)
-│   │   ├── db/               # Database connection (index.ts), schema & queries
-│   │   ├── routes/           # API route definitions (userRoutes, productRoutes, commentRoutes)
-│   │   └── index.ts          # Main server entry point
-│   └── ...
-├── .env.example              # Example environment variables
+├── frontend/ # React source files
+│ ├── src/
+│ │ ├── components/ # Reusable UI components (Navbar, ProductCard, CommentsSection…)
+│ │ ├── pages/ # Main pages (Home, Profile, CreatePage, EditPage, ProductPage)
+│ │ ├── hooks/ # Custom hooks (useAuthReq, useUserSync, useProducts, useComments)
+│ │ ├── lib/ # API setup (axios, api.js)
+│ │ ├── App.jsx
+│ │ ├── main.jsx
+│ │ └── index.css # Tailwind + DaisyUI integration
+│ └── ...
+├── backend/ # Express source files
+│ ├── src/
+│ │ ├── config/ # Environment configuration (env.ts)
+│ │ ├── controllers/ # Request handlers (userController, productController, commentController)
+│ │ ├── db/ # Database connection (index.ts), schema & queries
+│ │ ├── routes/ # API route definitions (userRoutes, productRoutes, commentRoutes)
+│ │ └── index.ts # Main server entry point
+│ └── ...
+├── .env.example # Example environment variables
 ├── package.json (both frontend & backend)
 └── README.md
 
-🚀 Setup & Running
+text
 
-1. Clone the repository
+---
+
+## 🚀 Setup & Running
+
+### 1. Clone the repository
+```bash
 git clone https://github.com/your-username/productify.git
 cd productify
-
 2. Backend setup
+bash
 cd backend
 npm install
-
 Create a .env file inside backend with the following variables (refer to .env.example):
+
+env
 PORT=5000
 DATABASE_URL=postgresql://user:password@localhost:5432/productify
 FRONTEND_URL=http://localhost:5173
 CLERK_PUBLISHABLE_KEY=pk_......
 CLERK_SECRET_KEY=sk_......
-
-
 Start the backend server:
+
+bash
 npm run dev
 The server will run on http://localhost:5000.
 
 3. Frontend setup
 Open a new terminal and go to the frontend folder:
+
+bash
 cd frontend
 npm install
-
 Create a .env file inside frontend:
+
 env
 VITE_API_URL=http://localhost:5000/api
 VITE_CLERK_PUBLISHABLE_KEY=pk_......
-
-
 Run the frontend:
+
+bash
 npm run dev
 The app will be available at http://localhost:5173.
 
 4. Database
 Ensure PostgreSQL is running.
+
 Run migrations (if using Drizzle):
+
+bash
 cd backend
 npx drizzle-kit push:pg
 (Alternatively, use drizzle-kit generate then migrate as per your setup.)
 
 📡 API Endpoints (Summary)
-
-Method	  Endpoint	                    Description                 	         Protected
-
-POST	  /api/users/sync	            Sync Clerk user data to DB	             ✅ Requires token
-GET	      /api/products	                Fetch all products with user & comments	 ❌ Public
-GET	      /api/products/my            	Fetch current user's products	         ✅ Requires token
-GET	      /api/products/:id	            Fetch a single product with its comments ❌ Public
-POST	  /api/products	                Create a new product	                 ✅ Requires token
-PUT	      /api/products/:id	            Update a product (owner only)            ✅ Requires token
-DELETE	  /api/products/:id	            Delete a product (owner only)	         ✅ Requires token
-POST	  /api/comments/:productId    	Add a comment to a product	             ✅ Requires token
-DELETE	  /api/comments/:commentId	    Delete a comment (owner only)	         ✅ Requires token
-
-
+Method	Endpoint	Description	Protected
+POST	/api/users/sync	Sync Clerk user data to DB	✅ Requires token
+GET	/api/products	Fetch all products with user & comments	❌ Public
+GET	/api/products/my	Fetch current user's products	✅ Requires token
+GET	/api/products/:id	Fetch a single product with its comments	❌ Public
+POST	/api/products	Create a new product	✅ Requires token
+PUT	/api/products/:id	Update a product (owner only)	✅ Requires token
+DELETE	/api/products/:id	Delete a product (owner only)	✅ Requires token
+POST	/api/comments/:productId	Add a comment to a product	✅ Requires token
+DELETE	/api/comments/:commentId	Delete a comment (owner only)	✅ Requires token
 📝 Future Improvements
 Add search and filtering by categories.
+
 Support image uploads instead of URLs.
+
 Real‑time notifications for new comments.
+
 Rating system (stars) for products.
 
 👥 Team
-Developer: [Ali Shaboot ]
-Technologies: React, Express, PostgreSQL, Drizzle, Clerk, Tailwind
+Developer: [Ali Shaboot]
 
-Thank you for using PRODUCTIFY!
-We hope you enjoy sharing your products. 🚀
+Technologies: React, Express, PostgreSQL, Drizzle, Clerk, Tailwind
