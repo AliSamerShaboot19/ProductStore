@@ -6,6 +6,7 @@ import { syncUser } from '../lib/api'
 const useUserSync = () => {
   const { isSignedIn } = useAuth()
   const { user } = useUser()
+
   const {
     mutate: syncUserMutation,
     isPending,
@@ -13,15 +14,19 @@ const useUserSync = () => {
   } = useMutation({ mutationFn: syncUser })
 
   useEffect(() => {
-    if (isSignedIn && user && !isPending && !isSuccess) {
+    const email = user?.primaryEmailAddress?.emailAddress
+    const name = user?.fullName || user?.firstName || 'User'
+    const imageUrl = user?.imageUrl
+
+    if (isSignedIn && user?.id && email && !isPending && !isSuccess) {
       syncUserMutation({
-        clerkId: user.id,
-        email: user.primaryEmailAddress.emailAddress,
-        name: user.fullName || user.firstName,
-        imageUrl: user.imageUrl
+        email: email,
+        name: name,
+        imageUrl: imageUrl
       })
     }
-  }, [isPending, isSignedIn, user, syncUserMutation, isSuccess])
+  }, [isSignedIn, user, isPending, isSuccess, syncUserMutation])
+
   return {
     isSynced: isSuccess
   }

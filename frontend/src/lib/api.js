@@ -1,10 +1,12 @@
 import api from './axios'
 
+// USERS API
 export const syncUser = async userData => {
   const { data } = await api.post('/users/sync', userData)
   return data
 }
 
+// Products API
 export const getAllProducts = async () => {
   const { data } = await api.get('/products')
   return data
@@ -20,7 +22,7 @@ export const getMyProducts = async () => {
   return data
 }
 
-export const creaeProduct = async productData => {
+export const createProduct = async productData => {
   const { data } = await api.post('/products', productData)
   return data
 }
@@ -35,8 +37,9 @@ export const deleteProduct = async id => {
   return data
 }
 
+// Comments API
 export const createComment = async ({ productId, content }) => {
-  const { data } = await api.post(`/comments/${productId}`, content)
+  const { data } = await api.post(`/comments/${productId}`, { content })
   return data
 }
 
