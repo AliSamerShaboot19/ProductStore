@@ -53,29 +53,61 @@ The frontend is built with **React**, the backend with **Express + PostgreSQL**,
 
 ## 📁 Project Structure
 PRODUCTIFY/
-├── frontend/ # React source files
+├── frontend/ # React frontend
+│ ├── public/
+│ │ └── forgit.jpg # (الصورة المستخدمة في README)
 │ ├── src/
-│ │ ├── components/ # Reusable UI components (Navbar, ProductCard, CommentsSection…)
-│ │ ├── pages/ # Main pages (Home, Profile, CreatePage, EditPage, ProductPage)
-│ │ ├── hooks/ # Custom hooks (useAuthReq, useUserSync, useProducts, useComments)
-│ │ ├── lib/ # API setup (axios, api.js)
+│ │ ├── components/ # المكونات القابلة لإعادة الاستخدام
+│ │ │ ├── CommentSection.jsx
+│ │ │ ├── EditProductForm.jsx
+│ │ │ ├── LoadingSpinner.jsx
+│ │ │ ├── Navbar.jsx
+│ │ │ ├── ProductCard.jsx
+│ │ │ └── ThemeSelector.jsx
+│ │ ├── hooks/ # الـ Custom Hooks
+│ │ │ ├── useAuthReq.js
+│ │ │ ├── useComments.js
+│ │ │ ├── useProducts.js
+│ │ │ └── useUserSync.js
+│ │ ├── lib/ # إعدادات API
+│ │ │ ├── api.js
+│ │ │ └── axios.js
+│ │ ├── pages/ # الصفحات الرئيسية
+│ │ │ ├── CreatePage.jsx
+│ │ │ ├── EditPage.jsx
+│ │ │ ├── Home.jsx
+│ │ │ ├── Productpage.jsx
+│ │ │ └── Profile.jsx
 │ │ ├── App.jsx
-│ │ ├── main.jsx
-│ │ └── index.css # Tailwind + DaisyUI integration
-│ └── ...
-├── backend/ # Express source files
+│ │ ├── index.css # تكامل Tailwind + DaisyUI
+│ │ └── main.jsx
+│ ├── .env # متغيرات البيئة (VITE_API_URL, VITE_CLERK_PUBLISHABLE_KEY)
+│ ├── index.html
+│ └── package.json
+│
+├── backend/ # Express backend
 │ ├── src/
-│ │ ├── config/ # Environment configuration (env.ts)
-│ │ ├── controllers/ # Request handlers (userController, productController, commentController)
-│ │ ├── db/ # Database connection (index.ts), schema & queries
-│ │ ├── routes/ # API route definitions (userRoutes, productRoutes, commentRoutes)
-│ │ └── index.ts # Main server entry point
-│ └── ...
-├── .env.example # Example environment variables
-├── package.json (both frontend & backend)
-└── README.md
-
-text
+│ │ ├── config/
+│ │ │ └── env.ts # متغيرات البيئة (PORT, DATABASE_URL, CLERK...)
+│ │ ├── controllers/ # معالجة الطلبات
+│ │ │ ├── commentController.ts
+│ │ │ ├── productController.ts
+│ │ │ └── userController.ts
+│ │ ├── db/ # قاعدة البيانات
+│ │ │ ├── index.ts # اتصال Drizzle
+│ │ │ ├── queries.ts # استعلامات CRUD
+│ │ │ └── Schema.ts # جداول وعلاقات
+│ │ ├── routes/ # تعريف المسارات
+│ │ │ ├── commentRoutes.ts
+│ │ │ ├── productRoutes.ts
+│ │ │ └── userRoutes.ts
+│ │ └── index.ts # نقطة الدخول الرئيسية للخادم
+│ ├── .env # متغيرات البيئة (PORT, DATABASE_URL, CLERK_SECRET...)
+│ ├── .env.example # نموذج للمتغيرات
+│ └── package.json
+│
+├── .gitignore
+└── README.mdtext
 
 ---
 
