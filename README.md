@@ -53,79 +53,83 @@ The frontend is built with **React**, the backend with **Express + PostgreSQL**,
 
 ## 📁 Project Structure
 PRODUCTIFY/
-├── frontend/ # React frontend
+├── frontend/
 │ ├── public/
-│ │ └── forgit.jpg # (الصورة المستخدمة في README)
+│ │ └── forgit.jpg 
 │ ├── src/
-│ │ ├── components/ # المكونات القابلة لإعادة الاستخدام
+│ │ ├── components/ 
 │ │ │ ├── CommentSection.jsx
 │ │ │ ├── EditProductForm.jsx
 │ │ │ ├── LoadingSpinner.jsx
 │ │ │ ├── Navbar.jsx
 │ │ │ ├── ProductCard.jsx
 │ │ │ └── ThemeSelector.jsx
-│ │ ├── hooks/ # الـ Custom Hooks
+│ │ ├── hooks/ 
 │ │ │ ├── useAuthReq.js
 │ │ │ ├── useComments.js
 │ │ │ ├── useProducts.js
 │ │ │ └── useUserSync.js
-│ │ ├── lib/ # إعدادات API
+│ │ ├── lib/ 
 │ │ │ ├── api.js
 │ │ │ └── axios.js
-│ │ ├── pages/ # الصفحات الرئيسية
+│ │ ├── pages/
 │ │ │ ├── CreatePage.jsx
 │ │ │ ├── EditPage.jsx
 │ │ │ ├── Home.jsx
 │ │ │ ├── Productpage.jsx
 │ │ │ └── Profile.jsx
 │ │ ├── App.jsx
-│ │ ├── index.css # تكامل Tailwind + DaisyUI
-│ │ └── main.jsx
-│ ├── .env # متغيرات البيئة (VITE_API_URL, VITE_CLERK_PUBLISHABLE_KEY)
+│ │ ├── index.css 
+│ │ └── main.jsx 
+│ ├── .env 
 │ ├── index.html
 │ └── package.json
 │
-├── backend/ # Express backend
+├── backend/ 
 │ ├── src/
 │ │ ├── config/
-│ │ │ └── env.ts # متغيرات البيئة (PORT, DATABASE_URL, CLERK...)
-│ │ ├── controllers/ # معالجة الطلبات
+│ │ │ └── env.ts
+│ │ ├── controllers/
 │ │ │ ├── commentController.ts
 │ │ │ ├── productController.ts
 │ │ │ └── userController.ts
-│ │ ├── db/ # قاعدة البيانات
-│ │ │ ├── index.ts # اتصال Drizzle
-│ │ │ ├── queries.ts # استعلامات CRUD
-│ │ │ └── Schema.ts # جداول وعلاقات
-│ │ ├── routes/ # تعريف المسارات
+│ │ ├── db/ 
+│ │ │ ├── index.ts 
+│ │ │ ├── queries.ts 
+│ │ │ └── Schema.ts
+│ │ ├── routes/
 │ │ │ ├── commentRoutes.ts
 │ │ │ ├── productRoutes.ts
 │ │ │ └── userRoutes.ts
-│ │ └── index.ts # نقطة الدخول الرئيسية للخادم
-│ ├── .env # متغيرات البيئة (PORT, DATABASE_URL, CLERK_SECRET...)
-│ ├── .env.example # نموذج للمتغيرات
+│ │ └── index.ts 
+│ ├── .env
+│ ├── .env.example 
 │ └── package.json
 │
 ├── .gitignore
-└── README.mdtext
+└── README.md
+
+---
+
 
 ---
 
 ## 🚀 Setup & Running
 
 ### 1. Clone the repository
-
+```bash
 git clone https://github.com/your-username/productify.git
 cd productify
 
 2. Backend setup
- 
+
 cd backend
 npm install
 
 Create a .env file inside backend with the following variables (refer to .env.example):
 
 env
+ث
 PORT=5000
 DATABASE_URL=postgresql://user:password@localhost:5432/productify
 FRONTEND_URL=http://localhost:5173
@@ -144,20 +148,26 @@ cd frontend
 npm install
 
 Create a .env file inside frontend:
+
 env
+
 VITE_API_URL=http://localhost:5000/api
 VITE_CLERK_PUBLISHABLE_KEY=pk_......
 
 Run the frontend:
 
 npm run dev
+
 The app will be available at http://localhost:5173.
 
 4. Database
 
 Ensure PostgreSQL is running.
+
 Run migrations (if using Drizzle):
+
 cd backend
+
 npx drizzle-kit push:pg
 (Alternatively, use drizzle-kit generate then migrate as per your setup.)
 
