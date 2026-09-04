@@ -68,27 +68,6 @@ Backend
 
 ---
 
-## 🗂️ Project Structure
-
-PRODUCTIFY/
-├── frontend/
-│   ├── public/ (static assets)
-│   ├── src/
-│   │   ├── components/ (UI components)
-│   │   ├── hooks/ (custom hooks & API hooks)
-│   │   ├── lib/ (api wrappers / axios)
-│   │   └── pages/ (route pages)
-│   └── package.json
-├── backend/
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── db/ (drizzle schema & queries)
-│   │   ├── routes/
-│   │   └── index.ts (server)
-│   └── package.json
-├── .gitignore
-└── README.md
-
 ---
 
 ## ⚡ Quick Start — Local Development
