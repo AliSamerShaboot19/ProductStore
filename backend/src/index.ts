@@ -10,7 +10,8 @@ import commentRoutes from './routes/commentRoutes'
 
 const app = express()
 
-app.use(cors({ origin: "https://product-store-o8jt-kshcwhfil-alis-projects-fc02f896.vercel.app/", credentials: true }))
+
+app.use(cors({ origin: '*', credentials: true }))
 app.use(clerkMiddleware())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
