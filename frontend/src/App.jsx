@@ -1,4 +1,4 @@
-import Navbar from './components/Navbar'
+import NavBar from './components/NavBar'
 import { Navigate, Route, Routes } from 'react-router'
 import Home from './pages/Home'
 import Productpage from './pages/Productpage'
@@ -16,7 +16,7 @@ function App () {
 
   return ( 
     <div className='min-h-screen bg-base-100'>
-      <Navbar />
+      <NavBar />
       <main className='max-w-5xl mx-auto px-4 py-8'>
         <Routes>
           <Route path='/' element={<Home />} />
