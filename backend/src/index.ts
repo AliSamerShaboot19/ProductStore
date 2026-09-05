@@ -10,6 +10,7 @@ import commentRoutes from './routes/commentRoutes'
 
 const app = express()
 
+
 app.use(cors({ origin: '*', credentials: true }))
 app.use(clerkMiddleware())
 app.use(express.json())

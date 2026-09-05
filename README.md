@@ -1,176 +1,236 @@
-📦 PRODUCTIFY – Product Sharing Platform
+# 📦 PRODUCTIFY — Product Sharing Platform
 
 ![Productify Screenshot](./frontend/public/forgit.jpg)
 
-🚀 Overview
-PRODUCTIFY is a full‑stack application that allows users to:
+[![Repo Size](https://img.shields.io/github/repo-size/AliSamerShaboot19/ProductStore)](https://github.com/AliSamerShaboot19/ProductStore)
+[![License](https://img.shields.io/github/license/AliSamerShaboot19/ProductStore)](LICENSE)
+[![Issues](https://img.shields.io/github/issues/AliSamerShaboot19/ProductStore)](https://github.com/AliSamerShaboot19/ProductStore/issues)
 
-    Browse products posted by the community.
+---
 
-    Add new products (after signing in).
+## 🚀 Project Overview
 
-    Edit or delete their own products.
+Productify is a full‑stack web application that makes sharing, discovering, and discussing products simple and delightful. It's built with a modern stack (React + Express + PostgreSQL) and integrates Clerk for user authentication and Drizzle ORM for type-safe database access.
 
-    Comment on any product.
+Key user flows:
+- Browse products shared by the community
+- Create, edit and delete your own products
+- Comment on products and manage your comments
+- User account syncing from Clerk into the application database
 
-    Automatically sync user data with the database via Clerk.
+This README gives maintainers and contributors a concise but complete guide to run, develop, and extend Productify.
 
-The frontend is built with React, the backend with Express + PostgreSQL, using Drizzle ORM for database access and Clerk for authentication.
+---
 
-✨ Key Features
+## ✨ Highlights
 
-    Feature	Description
+- Clean, responsive UI with Tailwind CSS + DaisyUI
+- Secure auth with Clerk (client + server integration)
+- Robust backend using Express + PostgreSQL + Drizzle ORM
+- Client-side caching & sync with TanStack Query
+- Theme support (30+ DaisyUI themes) and responsive design
 
-    🔐 Clerk Authentication	Secure sign‑in/sign‑out via email or social providers.  
-    📦 Product Management	Create, view, edit, and delete products (products are tied to their owners).
-    💬 Comment System	Add and delete comments on products (only the comment owner can delete).
-    👤 User Profile	View all your products with edit/delete options.
-    🎨 Multiple Themes	Choose from 30+ DaisyUI themes (preference saved locally).
-    📱 Responsive Design	Smooth experience on all devices using Tailwind CSS.
-    🔄 User Sync	User data is automatically synced from Clerk to the database upon login.
-    ⚡ State Management	Powered by TanStack Query for caching and instant updates.
+---
 
-🛠️ Tech Stack
+## 🧭 Table of Contents
 
-            Frontend
+- Project Overview
+- Highlights
+- Tech Stack
+- Project Structure
+- Quick Start (local)
+- Environment Variables
+- API Reference
+- Database / Migrations
+- Deployment Tips
+- Development Notes
+- Contributing
+- License
+- Contact
 
-React 19 + React Router v7
+---
 
-Clerk React for authentication
+## 🧰 Tech Stack
 
-TanStack Query (React Query) for data state management
+Frontend
+- React 19 + React Router v7
+- Clerk React (Auth)
+- TanStack Query (React Query)
+- Tailwind CSS + DaisyUI
+- Lucide React (icons)
 
-Tailwind CSS + DaisyUI for styling and theming
+Backend
+- Node.js + Express
+- PostgreSQL
+- Drizzle ORM (type-safe queries and migrations)
+- Clerk Express (server-side auth)
+- Cors, dotenv for runtime configuration
 
-Lucide React for icons
+---
 
-            Backend
+---
 
-Node.js + Express
+## ⚡ Quick Start — Local Development
 
-PostgreSQL relational database
+Prerequisites:
+- Node.js (v18+ recommended)
+- PostgreSQL (local or Docker)
+- pnpm / npm / yarn (any will do)
 
-Drizzle ORM for database interaction
+1) Clone the repository
 
-Clerk Express for server‑side authentication
+```bash
+git clone https://github.com/AliSamerShaboot19/ProductStore.git
+cd ProductStore
+```
 
-Cors and dotenv for configuration
+2) Backend setup
 
-
-📁 Project Structure
-
-PRODUCTIFY/
-├── frontend/                 # React source files
-│   ├── src/
-│   │   ├── components/       # Reusable UI components (Navbar, ProductCard, CommentsSection…)
-│   │   ├── pages/            # Main pages (Home, Profile, CreatePage, EditPage, ProductPage)
-│   │   ├── hooks/            # Custom hooks (useAuthReq, useUserSync, useProducts, useComments)
-│   │   ├── lib/              # API setup (axios, api.js)
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css         # Tailwind + DaisyUI integration
-│   └── ...
-├── backend/                  # Express source files
-│   ├── src/
-│   │   ├── config/           # Environment configuration (env.ts)
-│   │   ├── controllers/      # Request handlers (userController, productController, commentController)
-│   │   ├── db/               # Database connection (index.ts), schema & queries
-│   │   ├── routes/           # API route definitions (userRoutes, productRoutes, commentRoutes)
-│   │   └── index.ts          # Main server entry point
-│   └── ...
-├── .env.example              # Example environment variables
-├── package.json (both frontend & backend)
-└── README.md
-
-🚀 Setup & Running
-
-1. Clone the repository
-
-git clone https://github.com/your-username/productify.git
-cd productify
-
-2. Backend setup
-
+```bash
 cd backend
 npm install
+```
 
-Create a .env file inside backend with the following variables (refer to .env.example):
+Create a `.env` file in `backend/` (see Environment Variables below) and start the server in development mode:
 
+```bash
+npm run dev
+# server runs by default on http://localhost:5000
+```
+
+3) Frontend setup
+
+Open a new terminal:
+
+```bash
+cd frontend
+npm install
+```
+
+Create a `.env` file in `frontend/` (see Environment Variables below) and start the dev server:
+
+```bash
+npm run dev
+# frontend runs by default on http://localhost:5173
+```
+
+Open http://localhost:5173 in your browser.
+
+---
+
+## 🔑 Environment Variables
+
+backend/.env (example)
+
+```
 PORT=5000
 DATABASE_URL=postgresql://user:password@localhost:5432/productify
 FRONTEND_URL=http://localhost:5173
-CLERK_PUBLISHABLE_KEY=pk_......
-CLERK_SECRET_KEY=sk_......
+CLERK_PUBLISHABLE_KEY=pk_...
+CLERK_SECRET_KEY=sk_...
+```
 
+frontend/.env (example)
 
-Start the backend server:
-
-npm run dev
-
-The server will run on http://localhost:5000.
-
-
-
-3. Frontend setup
-Open a new terminal and go to the frontend folder:
-
-
-cd frontend
-npm install
-
-
-Create a .env file inside frontend:
-env
-
+```
 VITE_API_URL=http://localhost:5000/api
-VITE_CLERK_PUBLISHABLE_KEY=pk_......
+VITE_CLERK_PUBLISHABLE_KEY=pk_...
+```
 
+Tips:
+- Keep secret keys out of source control. Use a secrets manager for production.
+- If using Docker, wire DATABASE_URL to the database container.
 
-Run the frontend:
-npm run dev
-The app will be available at http://localhost:5173.
+---
 
-4. Database
+## 🔌 API Reference (Summary)
 
-Ensure PostgreSQL is running.
+Base: /api
 
-Run migrations (if using Drizzle):
+- POST  /api/users/sync        — Sync Clerk user data to local DB
+- GET   /api/products         — Get all products (paginated)
+- GET   /api/products/my      — Get products owned by current user
+- GET   /api/products/:id     — Get product by id (with comments)
+- POST  /api/products         — Create a product (auth required)
+- PUT   /api/products/:id     — Update a product (owner only)
+- DELETE /api/products/:id    — Delete a product (owner only)
+- POST  /api/comments/:productId — Create comment on a product
+- DELETE /api/comments/:commentId — Delete comment (owner only)
 
-cd backend
+Notes:
+- All auth-protected endpoints use Clerk middleware on the server.
+- Returns JSON with clear error messages and status codes.
 
+---
+
+## 🗄️ Database & Migrations
+
+This project uses Drizzle ORM for schema + migrations. If you add/modify models:
+
+1. Update `backend/src/db/Schema.ts`
+2. Generate migration using drizzle-kit (installed as a dev dependency):
+
+```bash
+npx drizzle-kit generate
 npx drizzle-kit push:pg
+```
 
-(Alternatively, use drizzle-kit generate then migrate as per your setup.)
+If you prefer manual migration tools (Flyway, pg-migrate), keep the Drizzle schema in sync.
 
-📡 API Endpoints (Summary)
+---
 
-Method	  Endpoint	                    Description                 	         Protected
+## 🚢 Deployment Tips
 
-POST	  /api/users/sync	            Sync Clerk user data to DB	             ✅ Requires token
-GET	      /api/products	                Fetch all products with user & comments	 ❌ Public
-GET	      /api/products/my            	Fetch current user's products	         ✅ Requires token
-GET	      /api/products/:id	            Fetch a single product with its comments ❌ Public
-POST	  /api/products	                Create a new product	                 ✅ Requires token
-PUT	      /api/products/:id	            Update a product (owner only)            ✅ Requires token
-DELETE	  /api/products/:id	            Delete a product (owner only)	         ✅ Requires token
-POST	  /api/comments/:productId    	Add a comment to a product	             ✅ Requires token
-DELETE	  /api/comments/:commentId	    Delete a comment (owner only)	         ✅ Requires token
+- Set environment variables in your hosting provider (Vercel, Render, Heroku, Fly.io, etc.).
+- Use a managed PostgreSQL service in production (Supabase, Neon, AWS RDS).
+- Ensure Clerk publishable & secret keys are set for both client and server.
+- For production builds:
+  - Frontend: `npm run build` (in /frontend), then serve the `dist` directory or deploy to Vercel/Netlify.
+  - Backend: run the compiled Node/TS output (or use ts-node in some providers).
 
+---
 
-📝 Future Improvements
+## 🧪 Testing & Development Notes
 
-Add search and filtering by categories.
+- Use TanStack Query devtools to inspect client caching and network requests during development.
+- Use the `useAuthReq` hook (frontend) to make authenticated requests—it handles Clerk token injection.
+- Keep component responsibilities small and test API contracts with Postman/Insomnia.
 
-Support image uploads instead of URLs.
+---
 
-Real‑time notifications for new comments.
+## ♻️ Future Improvements (Shortlist)
 
-Rating system (stars) for products.
+- Add product search & category filters (server + client)
+- Support image uploads (S3/Cloudinary) instead of image URLs
+- Real‑time updates (WebSockets / Pusher) for comments
+- Rating system and product metadata tags
+- Pagination, sorting, advanced filtering
 
-👥 Team
-Developer: [Ali Shaboot ]
+---
 
-Technologies: React, Express, PostgreSQL, Drizzle, Clerk, Tailwind
+## 🤝 Contributing
 
-Thank you for using PRODUCTIFY!
-We hope you enjoy sharing your products. 🚀
+Thank you for thinking about contributing! A suggested workflow:
+
+1. Fork the repository and create a branch: `feature/your-feature` or `fix/issue-number`
+2. Run the project locally and add tests where appropriate
+3. Submit a PR with a clear description and screenshots if the change affects UI
+
+Please open issues for feature requests or bugs before large changes so we can coordinate.
+
+---
+
+## 📄 License
+
+This repository is provided under the MIT License. See LICENSE for details.
+
+---
+
+## 🙋 Contact
+
+Developer: Ali Shaboot
+- GitHub: https://github.com/AliSamerShaboot19
+
+---
+
+Thank you for checking out Productify — I hope this README makes it easier to run, develop, and contribute to the project. Pull requests and feedback are always welcome!
