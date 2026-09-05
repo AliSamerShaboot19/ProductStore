@@ -8,6 +8,10 @@
 
 ---
 
+## 🌐 Live Demo
+[click here](https://product-store-2fpatrqsj-alis-projects-fc02f896.vercel.app)
+
+
 ## 🚀 Project Overview
 
 Productify is a full‑stack web application that makes sharing, discovering, and discussing products simple and delightful. It's built with a modern stack (React + Express + PostgreSQL) and integrates Clerk for user authentication and Drizzle ORM for type-safe database access.
