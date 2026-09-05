@@ -1,0 +1,21 @@
+{
+  "name": "productstorefullstack",
+  "version": "1.0.0",
+  "description": "📦 PRODUCTIFY – Product Sharing Platform",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix frontend && npm install --prefix backend && npm run build --prefix frontend && npm run build --prefix backend",
+    "start":"npm run start --prefix backend && npm run db:push --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AliSamerShaboot19/ProductStore.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AliSamerShaboot19/ProductStore/issues"
+  },
+  "homepage": "https://github.com/AliSamerShaboot19/ProductStore#readme"
+}
